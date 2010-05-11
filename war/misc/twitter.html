@@ -1,0 +1,38 @@
+<html>
+<head></head>
+<body>
+<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'search',
+  search: '(@iskcon OR #iskcon OR #iskconsv)',
+  interval: 10000,
+  title: '#iskconsv',
+  subject: 'ISKCON of Silicon Valley',
+  width: 'auto',
+  height: 900,
+  theme: {
+    shell: {
+      background: '#8ec1da',
+      color: '#ffffff'
+    },
+    tweets: {
+      background: '#ffffff',
+      color: '#444444',
+      links: '#1985b5'
+    }
+  },
+  features: {
+    scrollbar: false,
+    loop: true,
+    live: true,
+    hashtags: true,
+    timestamp: true,
+    avatars: true,
+    behavior: 'default'
+  }
+}).render().start();
+</script>
+</body>
+</html>
