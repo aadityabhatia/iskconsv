@@ -1,5 +1,5 @@
 .rootPanel {
-	min-width: 1058px;
+	min-width: 760px;
 	min-height: 400px;
 }
 
@@ -14,8 +14,8 @@ a:hover {
 	text-decoration: underline;
 }
 
-.gwt-MenuItem a {
-	color:#666666;
+.menuItemHyperlink {
+	color: #666666;
 	text-decoration: none;
 	cursor: auto;
 }
@@ -52,49 +52,21 @@ a.navigationListItem {
 }
 
 .contentWrapperPanel {
-	border-width: thick;
+	border-width: medium;
+	border-style: solid;
+	padding: 5px;
+	border-color: gray;
 }
 
-.estimatorWidget {
-	margin: 10px;
-	text-align: center;
-}
-
-.estimatorWidget * {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-.estimatorWidget input {
-	margin-bottom: 20px;
+.buttonBar {
+	text-align: right;
 }
 
 .buttonBar * {
 	margin: 10px;
 }
 
-.text-medium {
-	font-size: medium;
-}
-
-.text-large {
-	font-size: large;
-}
-
-.center {
-	text-align: center;
-}
-
-.border-none {
-	border-width: 0px;
-}
-
-.float-right {
-	float: right;
-}
-
-.iframe
-{
+.iframe {
 	border: none;
 	padding: 0px;
 	height: 100%;

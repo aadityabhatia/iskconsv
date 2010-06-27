@@ -3,23 +3,33 @@ package org.iskconsv.client.command;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 
+/**
+ * Adds a token to the browser history and executes the given command
+ */
 public class HistoryCommand implements Command
 {
-	private String anchor;
+	private String token;
 	
-	public HistoryCommand(String anchor)
+	public HistoryCommand(String token)
 	{
-		this.anchor = anchor;
+		this.token = token;
 	}
 	
-	public void setAnchor(String anchor)
+	@SuppressWarnings("unchecked")
+	public HistoryCommand(Enum token)
 	{
-		this.anchor = anchor;
+		this.token = token.name();
+	}
+	
+	public void setToken(String token)
+	{
+		this.token = token;
 	}
 	
 	@Override
 	public void execute()
 	{
-		History.newItem(anchor);
+		if (token != null)
+			History.newItem(token);
 	}
 }

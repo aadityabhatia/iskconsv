@@ -1,32 +1,34 @@
 package org.iskconsv.client;
 
 import org.iskconsv.client.command.FrameCommand;
+import org.iskconsv.client.command.HistoryCommand;
 import org.iskconsv.client.command.PopupCommand;
+import org.iskconsv.client.command.TextCommand;
 import org.iskconsv.client.command.WidgetCommand;
-import org.iskconsv.client.widget.LoginPopup;
+import org.iskconsv.client.resources.Resources;
+import org.iskconsv.client.view.Donate;
+import org.iskconsv.client.view.LoginPopup;
+import org.iskconsv.client.view.SubscribePopup;
+import org.iskconsv.client.widget.IFrame;
 import org.iskconsv.client.widget.NavigationBar;
-import org.iskconsv.client.widget.SubscribePopup;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.ui.CaptionPanel;
-import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
-import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.MenuBar;
-import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.gwt.user.client.ui.StackLayoutPanel;
-import com.google.gwt.user.client.ui.Widget;
 
-public class Index extends Composite implements EntryPoint
+public class Index implements EntryPoint
 {
 	private static IndexUiBinder uiBinder = GWT.create(IndexUiBinder.class);
 
-	interface IndexUiBinder extends UiBinder<Widget, Index>
+	interface IndexUiBinder extends UiBinder<DockLayoutPanel, Index>
 	{
 	}
 
@@ -37,66 +39,62 @@ public class Index extends Composite implements EntryPoint
 	NavigationBar topNavigationBar;
 
 	@UiField
-	MenuItem agendaMenuItem, homeMenuItem, signInMenuItem, liveVideoMenuItem, subscribeMenuItem;
-
-	@UiField
 	MenuBar menuBar;
 
 	@UiField
-	CaptionPanel contentPanel;
+	FlowPanel contentPanel;
 
 	@UiField
-	StackLayoutPanel stackPanel;
+	Resources resources;
 
-	private static Index self;
+	private static final String calendarURL = "http://www.google.com/calendar/embed?showTitle=0&showNav=0&showTabs=0&showCalendars=0&mode=AGENDA&height=600&wkst=2&bgcolor=%23FFFFFF&src=iskconsv.org_rbojmj93jcrbo0d4t6m17h54c0%40group.calendar.google.com&color=%23BE6D00&ctz=America%2FLos_Angeles";
 
-	private static final String calendarEmbedURL = "http://www.google.com/calendar/embed?showTitle=0&showNav=0&showTabs=0&showCalendars=0&mode=AGENDA&height=600&wkst=2&bgcolor=%23FFFFFF&src=iskconsv.org_rbojmj93jcrbo0d4t6m17h54c0%40group.calendar.google.com&color=%23BE6D00&ctz=America%2FLos_Angeles";
-	private static final String videoEmbedURL = "http://www.justin.tv/widgets/live_embed_player.swf?channel=iskconsv";
+	private static final String videoURL = "http://www.justin.tv/widgets/live_embed_player.swf?channel=iskconsv";
 
-	public Index()
+	private static final String spyURL = "http://spy.appspot.com/find/iskcon?full=1&latest=25";
+
+	enum Token
 	{
-		self = this;
-		initWidget(uiBinder.createAndBindUi(this));
-	}
-
-	public static Index getInstance()
-	{
-		return self;
+		calendar, video, spy, donate
 	}
 
 	@Override
 	public void onModuleLoad()
 	{
-		RootLayoutPanel.get().addStyleName("rootPanel");
-		RootLayoutPanel.get().add(this);
+		Controller controller = Controller.INSTANCE;
+		
+		RootLayoutPanel.get().add(uiBinder.createAndBindUi(this));
+		resources.style().ensureInjected();
 
-		contentPanel.setContentWidget(getWelcomeHTML());
+		Window.enableScrolling(false);
+		Window.setMargin("0px");
+		IFrame.setStylePrimaryName(resources.style().iframe());
 
-		agendaMenuItem.setCommand(new FrameCommand(calendarEmbedURL, contentPanel));
-		
-		liveVideoMenuItem.setCommand(new FrameCommand(videoEmbedURL, contentPanel));
+		controller.setTargetPanel(contentPanel);
+		History.addValueChangeHandler(controller);
 
-		homeMenuItem.setCommand(new WidgetCommand(getWelcomeHTML(), contentPanel));
-		
-		
-		
+		controller.addCommandMapItem("", new TextCommand(resources.welcomeMessage(), ""));
+		menuBar.addItem("Home", new HistoryCommand(""));
+
+		controller.addCommandMapItem(Token.calendar, new FrameCommand(calendarURL));
+		menuBar.addItem("Calendar", new HistoryCommand(Token.calendar));
+
+		controller.addCommandMapItem(Token.video, new FrameCommand(videoURL));
+		menuBar.addItem("Live Video", new HistoryCommand(Token.video));
+
+		controller.addCommandMapItem(Token.spy, new FrameCommand(spyURL));
+		menuBar.addItem("Live Stream", new HistoryCommand(Token.spy));
+
+		controller.addCommandMapItem(Token.donate, new WidgetCommand(Donate.class, null));
+		menuBar.addItem("Donate", new HistoryCommand(Token.donate));
+
 		if (Cookies.getCookie("username") == null)
-		{
-			signInMenuItem.setCommand(new PopupCommand(new LoginPopup()));
-			signInMenuItem.setText("Sign In");
-		}
+			menuBar.addItem("Sign In", new PopupCommand(LoginPopup.class));
 		else
-		{
-			signInMenuItem.setCommand(null);
-			signInMenuItem.setHTML("<a href='/auth/logout/'>Sign out</a>");
-		}
-		
-		subscribeMenuItem.setCommand(new PopupCommand(new SubscribePopup()));
-	}
+			menuBar.addItem("<a href='/auth/logout/'>Sign out</a>", true, new HistoryCommand(""));
 
+		menuBar.addItem("Subscribe", new PopupCommand(SubscribePopup.class));
 
-	private static HTML getWelcomeHTML()
-	{
-		return new HTML("<h3>Welcome to ISKCON of Silicon Valley</h3><h4>Here's what's you can do:<ol><li>View Events</li><li>View Live Content: Video, Tweets, photos and more...</li><li>Donate</li></ol></h4>");
+		History.fireCurrentHistoryState();
 	}
 }

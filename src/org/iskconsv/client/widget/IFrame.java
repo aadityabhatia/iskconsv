@@ -2,18 +2,18 @@ package org.iskconsv.client.widget;
 
 import com.google.gwt.user.client.ui.Frame;
 
-public class IFrame extends Frame
+public class IFrame
 {
-	public static final IFrame instance = new IFrame();
+	private static final Frame instance = new Frame();
 	
-	public IFrame()
+	public static Frame getFrame(String url)
 	{
-		this.setStylePrimaryName("iframe");
+		instance.setUrl(url);
+		return instance;
 	}
 	
-	public IFrame(String url)
+	public static void setStylePrimaryName(String name)
 	{
-		this();
-		this.setUrl(url);
+		instance.setStylePrimaryName(name);
 	}
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:with type="org.iskconsv.client.resources.Resources" field="resources" />
+	<g:HTMLPanel>
+		<div>
+			Lord Sri Krishna says (BG 9.26):
+			<br />
+			“If one offers Me with love and devotion and leaf, a flower, a fruit or water, I will accept it.”
+		</div>
+		<br />
+		Donations of all amounts are greatly appreciated and will benefit the community and yourself.
+		Donations to the temple are tax deductible. Receipts are available upon request.
+		<br />
+		<br />
+		<g:TabLayoutPanel barUnit='EM' barHeight='3'>
+			<g:tab>
+				<g:header>New Temple</g:header>
+				<g:Button ui:field="newTempleButton">New Temple</g:Button>
+			</g:tab>
+			<g:tab>
+				<g:header>Temple Operations</g:header>
+				<g:Button ui:field="operationsButton">Temple Operations</g:Button>
+			</g:tab>
+			<g:tab>
+				<g:header>Sankirtan</g:header>
+				<g:Button ui:field="sankirtanButton">Sankirtan</g:Button>
+			</g:tab>
+		</g:TabLayoutPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -9,6 +9,7 @@ public class AgendaWidget extends FlowPanel
 
 	public static final String calendarURL = "http://www.google.com/calendar/feeds/programforthefuture.com_ee5r0bm15qmbroe4alo76v5gas@group.calendar.google.com/public/full";
 
+	@SuppressWarnings("unused")
 	private static final String GDATA_API_KEY = "ABQIAAAA54d0gTgxqcQZ6EOe7Z9gKRRgYaIneHJ0gJayKvKA7hGFMgFKsBQyuLpmbOmgkDsIX4qTC07yWP-gUA";
 
 	// AgendaServiceAsync calendar = (AgendaServiceAsync)GWT.create(AgendaService.class);

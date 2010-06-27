@@ -1,4 +1,6 @@
-package org.iskconsv.client.widget;
+package org.iskconsv.client.view;
+
+import org.iskconsv.client.resources.Resources;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -23,7 +25,7 @@ public class LoginPopup extends PopupPanel implements ClickHandler
 		buttonBar.add(continueButton);
 		container.add(buttonBar);
 		
-		buttonBar.addStyleName("buttonBar");
+		buttonBar.addStyleName(Resources.INSTANCE.style().buttonBar());
 		container.getElement().getStyle().setProperty("textAlign", "center");
 		
 		cancelButton.addClickHandler(this);
