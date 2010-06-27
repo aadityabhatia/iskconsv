@@ -85,15 +85,15 @@ public class Index implements EntryPoint
 		controller.addCommandMapItem(Token.spy, new FrameCommand(spyURL));
 		menuBar.addItem("Live Stream", new HistoryCommand(Token.spy));
 
-		controller.addCommandMapItem(Token.donate, new WidgetCommand(Donate.class, null));
+		controller.addCommandMapItem(Token.donate, new WidgetCommand(new Donate(), null));
 		menuBar.addItem("Donate", new HistoryCommand(Token.donate));
 
 		if (Cookies.getCookie("username") == null)
-			menuBar.addItem("Sign In", new PopupCommand(LoginPopup.class));
+			menuBar.addItem("Sign In", new PopupCommand(new LoginPopup()));
 		else
 			menuBar.addItem("<a href='/auth/logout/'>Sign out</a>", true, new HistoryCommand(""));
 
-		menuBar.addItem("Subscribe", new PopupCommand(SubscribePopup.class));
+		menuBar.addItem("Subscribe", new PopupCommand(new SubscribePopup()));
 
 		History.fireCurrentHistoryState();
 	}
