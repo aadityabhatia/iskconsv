@@ -17,9 +17,9 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 public class Donate extends Composite
 {
 
-	private static DonateUiBinder uiBinder = GWT.create(DonateUiBinder.class);
+	private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
 
-	interface DonateUiBinder extends UiBinder<HTMLPanel, Donate>
+	interface MyUiBinder extends UiBinder<HTMLPanel, Donate>
 	{
 	}
 

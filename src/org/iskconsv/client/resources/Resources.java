@@ -15,4 +15,7 @@ public interface Resources extends ClientBundle
 	
 	@Source("logo.png")
 	ImageResource logo();
+	
+	@Source("peacock.jpg")
+	ImageResource peacock();
 }

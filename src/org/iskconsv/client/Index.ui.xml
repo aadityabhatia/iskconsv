@@ -1,31 +1,50 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
-	xmlns:blaze="urn:import:org.iskconsv.client.widget">
+	xmlns:isv="urn:import:org.iskconsv.client.widget" xmlns:isvView="urn:import:org.iskconsv.client.view">
 	<ui:with field='resources' type='org.iskconsv.client.resources.Resources' />
+	<ui:style>
+		.contentWrapperPanel {
+			border: medium solid gray;
+			padding: 5px;
+			overflow: auto;
+		}
+		
+		.navigationBar-Top {
+			float: right;
+			padding: 5px;
+			margin-right: 5px;
+		}
+		
+		.navigationBar a,.navigationBar div {
+			display: inline;
+			font-size: medium;
+			font-weight: bold;
+			font-family: helvetica;
+		}
+		
+		.logo {
+			font-size: 5em;
+			margin-top: 10px;
+			margin-left: 10px;
+			font-weight: bold;
+			color: #FF7F00;
+		}
+	</ui:style>
+
 	<g:DockLayoutPanel unit='EM' ui:field="layoutPanel">
 		<g:north size='7'>
 			<g:HTMLPanel>
 				<g:Image url='{resources.logo.getURL}' height='6em' />
-				<blaze:NavigationBar ui:field="topNavigationBar" styleName="{resources.style.navigationBarTop} {resources.style.navigationBar}" />
+				<!--  div class='{style.logo}'>ISKCON of Silicon Valley</div -->
+				<isv:NavigationBar ui:field="topNavigationBar" styleName="{style.navigationBarTop} {style.navigationBar}" />
 			</g:HTMLPanel>
 		</g:north>
 		<g:north size="2">
 			<g:MenuBar ui:field="menuBar" />
 		</g:north>
 		<g:center>
-			<g:FlowPanel ui:field="contentPanel" styleName="{resources.style.contentWrapperPanel}">
-				<!-- Home page -->
-				<g:HTML>
-					<h3>Welcome to ISKCON of Silicon Valley</h3>
-					<h4>
-						Here's what's you can do:
-						<ol>
-							<li>View Events</li>
-							<li>View Live Content: Video, Tweets, photos and more...</li>
-							<li>Donate</li>
-						</ol>
-					</h4>
-				</g:HTML>
+			<g:FlowPanel ui:field="contentPanel" styleName="{style.contentWrapperPanel}">
+				<isvView:Home />
 			</g:FlowPanel>
 		</g:center>
 	</g:DockLayoutPanel>

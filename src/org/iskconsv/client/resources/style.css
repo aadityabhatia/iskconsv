@@ -1,3 +1,11 @@
+body{
+	font-family: sans-serif;		
+}
+
+h1 {
+	color: teal;
+}
+
 .rootPanel {
 	min-width: 760px;
 	min-height: 400px;
@@ -7,7 +15,6 @@ a,a:visited {
 	color: #6666BB;
 	text-decoration: none;
 	font-weight: bold;
-	font-family: helvetica;
 }
 
 a:hover {
@@ -18,19 +25,6 @@ a:hover {
 	color: #666666;
 	text-decoration: none;
 	cursor: auto;
-}
-
-.navigationBar-Top {
-	float: right;
-	padding: 5px;
-	margin-right: 5px;
-}
-
-.navigationBar a,.navigationBar div {
-	display: inline;
-	font-size: medium;
-	font-weight: bold;
-	font-family: helvetica;
 }
 
 .navigationList {
@@ -49,13 +43,6 @@ a.navigationListItem {
 .navigationListItem-selected {
 	background-color: #CCCCDD;
 	color: white;
-}
-
-.contentWrapperPanel {
-	border-width: medium;
-	border-style: solid;
-	padding: 5px;
-	border-color: gray;
 }
 
 .buttonBar {

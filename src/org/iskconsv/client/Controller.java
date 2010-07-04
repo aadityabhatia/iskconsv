@@ -44,8 +44,7 @@ public class Controller implements ValueChangeHandler<String>
 		commandMap.put(token, command);
 	}
 	
-	@SuppressWarnings("unchecked")
-	public void addCommandMapItem(Enum token, Command command)
+	public void addCommandMapItem(Enum<?> token, Command command)
 	{
 		commandMap.put(token.name(), command);
 	}

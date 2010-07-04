@@ -10,11 +10,16 @@ public class WidgetCommand implements Command
 	private Widget widget;
 	private String historyToken;
 	
-	
 	public WidgetCommand(Widget widget, String historyToken)
 	{
 		this.widget = widget;
 		this.historyToken = historyToken;
+	}
+	
+	public WidgetCommand(Widget widget, Enum<?> historyToken)
+	{
+		this.widget = widget;
+		this.historyToken = historyToken.name();
 	}
 	
 	@Override

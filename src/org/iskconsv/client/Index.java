@@ -3,12 +3,14 @@ package org.iskconsv.client;
 import org.iskconsv.client.command.FrameCommand;
 import org.iskconsv.client.command.HistoryCommand;
 import org.iskconsv.client.command.PopupCommand;
-import org.iskconsv.client.command.TextCommand;
 import org.iskconsv.client.command.WidgetCommand;
 import org.iskconsv.client.resources.Resources;
+import org.iskconsv.client.view.Contact;
 import org.iskconsv.client.view.Donate;
+import org.iskconsv.client.view.Home;
 import org.iskconsv.client.view.LoginPopup;
 import org.iskconsv.client.view.SubscribePopup;
+import org.iskconsv.client.view.about.Iskcon;
 import org.iskconsv.client.widget.IFrame;
 import org.iskconsv.client.widget.NavigationBar;
 
@@ -55,7 +57,7 @@ public class Index implements EntryPoint
 
 	enum Token
 	{
-		calendar, video, spy, donate
+		calendar, video, spy, donate, contact, iskcon
 	}
 
 	@Override
@@ -64,28 +66,40 @@ public class Index implements EntryPoint
 		Controller controller = Controller.INSTANCE;
 		
 		RootLayoutPanel.get().add(uiBinder.createAndBindUi(this));
+		RootLayoutPanel.get().addStyleName(resources.style().rootPanel());
+		
 		resources.style().ensureInjected();
 
-		Window.enableScrolling(false);
 		Window.setMargin("0px");
+		
 		IFrame.setStylePrimaryName(resources.style().iframe());
 
 		controller.setTargetPanel(contentPanel);
 		History.addValueChangeHandler(controller);
 
-		controller.addCommandMapItem("", new TextCommand(resources.welcomeMessage(), ""));
+//		controller.addCommandMapItem("", new TextCommand(resources.welcomeMessage(), ""));
+		controller.addCommandMapItem("", new WidgetCommand(new Home(), ""));
 		menuBar.addItem("Home", new HistoryCommand(""));
 
+		MenuBar aboutMenu = new MenuBar(true);
+		menuBar.addItem("About", aboutMenu);
+		
+		controller.addCommandMapItem(Token.iskcon, new WidgetCommand(new Iskcon(), Token.iskcon));
+		aboutMenu.addItem("ISKCON", new HistoryCommand(Token.iskcon));
+		
+		MenuBar experienceMenu = new MenuBar(true);
+		menuBar.addItem("Experience", experienceMenu);
+		
 		controller.addCommandMapItem(Token.calendar, new FrameCommand(calendarURL));
-		menuBar.addItem("Calendar", new HistoryCommand(Token.calendar));
+		experienceMenu.addItem("Event Calendar", new HistoryCommand(Token.calendar));
 
 		controller.addCommandMapItem(Token.video, new FrameCommand(videoURL));
-		menuBar.addItem("Live Video", new HistoryCommand(Token.video));
+		experienceMenu.addItem("Live Video", new HistoryCommand(Token.video));
 
 		controller.addCommandMapItem(Token.spy, new FrameCommand(spyURL));
-		menuBar.addItem("Live Stream", new HistoryCommand(Token.spy));
+		experienceMenu.addItem("Live Stream", new HistoryCommand(Token.spy));
 
-		controller.addCommandMapItem(Token.donate, new WidgetCommand(new Donate(), null));
+		controller.addCommandMapItem(Token.donate, new WidgetCommand(new Donate(), Token.donate));
 		menuBar.addItem("Donate", new HistoryCommand(Token.donate));
 
 		if (Cookies.getCookie("username") == null)
@@ -94,6 +108,9 @@ public class Index implements EntryPoint
 			menuBar.addItem("<a href='/auth/logout/'>Sign out</a>", true, new HistoryCommand(""));
 
 		menuBar.addItem("Subscribe", new PopupCommand(new SubscribePopup()));
+		
+		controller.addCommandMapItem(Token.contact, new WidgetCommand(new Contact(), Token.contact));
+		menuBar.addItem("Contact", new HistoryCommand(Token.contact));
 
 		History.fireCurrentHistoryState();
 	}

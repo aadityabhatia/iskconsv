@@ -17,9 +17,9 @@
 		}
 		
 		.quotationText {
-			font-size: large;
-			font: italic;
+			font-size: x-large;
 			font-weight: bold;
+			font-family: 'Tangerine', sans-serif;
 		}
 		
 		.text {

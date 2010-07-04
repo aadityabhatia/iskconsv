@@ -1,0 +1,21 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:with type="org.iskconsv.client.resources.Resources" field="resources" />
+
+	<ui:style type="org.iskconsv.client.view.Home.Style">
+		.container {
+			text-align: center;
+			font-size: 150%;
+		}
+	</ui:style>
+
+	<g:HTMLPanel ui:field="container" styleName='{style.container}'>
+		<img style='float:left' src='http://broapocalypse.files.wordpress.com/2009/04/radha_y_krishna_1.jpg' />
+		<h1>Connect with Krishna</h1>
+		<h3>Question - <a href='#iskcon'>ISKCON</a></h3>
+		<h3>Reflect</h3>
+		<h3>Experience - <a href='#calendar'>Calendar</a> - <a href='#video'>Live Video</a> - <a href='#spy'>across the globe</a></h3>
+		<h3>Support - <a href='#donate'>Donate</a></h3>
+		<h3><a href='#contact'>Contact</a></h3>
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -8,18 +8,11 @@ public interface Style extends CssResource
 
 	String navigationList();
 
-	String navigationBar();
-
-	String contentWrapperPanel();
-
 	String iframe();
 
 	String buttonBar();
 
 	String rootPanel();
-
-	@ClassName("navigationBar-Top")
-	String navigationBarTop();
 
 	@ClassName("navigationListItem-selected")
 	String navigationListItemSelected();
