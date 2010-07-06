@@ -23,19 +23,15 @@
 		}
 		
 		.logo {
-			font-size: 5em;
-			margin-top: 10px;
-			margin-left: 10px;
-			font-weight: bold;
-			color: #FF7F00;
+			background-position: top left;
+			background-repeat: no-repeat;
 		}
 	</ui:style>
 
 	<g:DockLayoutPanel unit='EM' ui:field="layoutPanel">
 		<g:north size='7'>
-			<g:HTMLPanel>
-				<g:Image url='{resources.logo.getURL}' height='6em' />
-				<!--  div class='{style.logo}'>ISKCON of Silicon Valley</div -->
+			<g:HTMLPanel ui:field="header" styleName="{style.logo}">
+				<!--  g:Image ui:field="logoImage" url='{resources.logo.getURL}' height='6em' / -->
 				<isv:NavigationBar ui:field="topNavigationBar" styleName="{style.navigationBarTop} {style.navigationBar}" />
 			</g:HTMLPanel>
 		</g:north>

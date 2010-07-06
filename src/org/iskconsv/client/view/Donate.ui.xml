@@ -3,31 +3,23 @@
 	<ui:with type="org.iskconsv.client.resources.Resources" field="resources" />
 
 	<ui:style type="org.iskconsv.client.view.Donate.Style">
-		.button {
-			padding: 10px;
-			margin-left: 40px;
-			margin-right: 40px;
-			border-style: solid;
-			border-width: 10px !important;
-			font-size: large;
+		.donateWidget {
+			text-align: center;
 		}
 		
-		.selected {
-			border-color: #0f0;
+		.infoPane {
+			font-size: large;
+			overflow: auto;
+			padding: 5px;
 		}
 		
 		.quotationText {
-			font-size: x-large;
-			font-weight: bold;
-			font-family: 'Tangerine', sans-serif;
-		}
-		
-		.text {
-			font-size: large;
+			font-style: italic;
 		}
 		
 		.donateButton {
 			font-size: large;
+			font-weight: bold;
 			margin-left: 10px;
 			margin-right: 10px;
 		}
@@ -35,68 +27,82 @@
 		.amountTextbox {
 			text-align: center;
 			width: 6em;
-			font-size: large;
+			font-size: 200%;
 		}
 		
 		.amountButton {
-			font-size: large;
+			
+		}
+		
+		.categoryName {
+			color: #FF7F00;
+			font-variant: small-caps;
+			font-size: 230%;
+			font-weight: bold;
+			margin-top: -5px;
 		}
 	</ui:style>
 
-	<g:HTMLPanel>
-		<div class="{style.quotationText}">
-			Lord Sri Krishna says (BG 9.26):
-			<br />
-			“If one offers Me with love and devotion and leaf, a flower, a fruit or water, I will accept it.”
-		</div>
-		<br />
-		<br />
+	<g:DockLayoutPanel height="100%" unit="EM">
+		<g:east size="30">
+			<g:HTMLPanel styleName="{style.donateWidget}">
+				<h1>Donate for</h1>
+				<div ui:field="category" class="{style.categoryName}">
+					~ <small>select a category on left</small> ~
+				</div>
+				<div>
+					<h2>Via Paypal</h2>
+					<form ui:field="donationForm" method="post" action="https://www.paypal.com/cgi-bin/webscr"
+						target="_blank">
+						<g:Button ui:field="m10">-10</g:Button>
+						<g:Button ui:field="m1">-1</g:Button>
+						<input ui:field="donationAmount" type="text" class="{style.amountTextbox}" value="51"
+							name="a3" />
+						<g:Button ui:field="p1">+1</g:Button>
+						<g:Button ui:field="p10">+10</g:Button>
 
-		<div class="{style.text}">
-			Donate for:
-		</div>
-		<br />
-
-		<div style="text-align: center">
-			<g:Button ui:field="newTempleButton">New Temple</g:Button>
-			<g:Button ui:field="operationsButton">Temple Operations</g:Button>
-			<g:Button ui:field="sankirtanButton">Sankirtan</g:Button>
-		</div>
-		<br />
-
-		<div style="text-align: center">
-			<form ui:field="donationForm" method="post" action="https://www.paypal.com/cgi-bin/webscr"
-				target="_blank">
-				<g:Button ui:field="m10">-10</g:Button>
-				<g:Button ui:field="m1">-1</g:Button>
-				<input ui:field="donationAmount" type="text" class="{style.amountTextbox}" value="51"
-					name="a3" />
-				<g:Button ui:field="p1">+1</g:Button>
-				<g:Button ui:field="p10">+10</g:Button>
-
-				<input ui:field="donationItemName" type="hidden" name="item_name" />
-				<input type="hidden" value="teamisv@gmail.com" name="business" />
-				<input type="hidden" value="1" name="p3" />
-				<input type="hidden" value="M" name="t3" />
-				<input type="hidden" value="1" name="src" />
-				<input type="hidden" value="1" name="sra" />
-				<input type="hidden" name="return" value="http://www.iskconsv.org/payment-complete/" />
-				<input ui:field="donationType" type="hidden" value="" name="cmd" />
-				<input type="hidden" value="1" name="no_note" />
-				<input type="hidden" value="USD" name="currency_code" />
-				<input type="hidden" value="US" name="lc" />
-			</form>
-			<br />
-			<br />
-			<div style="text-align:center">
-				<g:Button ui:field="donateOnceButton">Donate Once</g:Button>
-				<g:Button ui:field="donateMonthlyButton">Donate Monthly</g:Button>
-			</div>
-		</div>
-		<br />
-		<br />
-		<div class="{style.text}">
-			Donations to the temple are tax deductible. Receipts are available upon request.
-		</div>
-	</g:HTMLPanel>
-</ui:UiBinder> 
+						<input ui:field="donationItemName" type="hidden" name="item_name" />
+						<input ui:field="destinationAccount" type="hidden" value="teamisv@gmail.com" name="business" />
+						<input type="hidden" value="1" name="p3" />
+						<input type="hidden" value="M" name="t3" />
+						<input type="hidden" value="1" name="src" />
+						<input type="hidden" value="1" name="sra" />
+						<input type="hidden" name="return" value="http://www.iskconsv.org/payment-complete/" />
+						<input ui:field="donationType" type="hidden" value="" name="cmd" />
+						<input type="hidden" value="1" name="no_note" />
+						<input type="hidden" value="USD" name="currency_code" />
+						<input type="hidden" value="US" name="lc" />
+					</form>
+					<br />
+					<br />
+					<g:Button ui:field="donateOnceButton">Donate Once</g:Button>
+					<g:Button ui:field="donateMonthlyButton">Donate Monthly</g:Button>
+				</div>
+				<br />
+					<g:Anchor ui:field="donateDetailsElectronic"><h2>E-Billpay Bank transfer</h2></g:Anchor>
+					<g:Anchor ui:field="donateDetailsInPerson"><h2>Drop a Cheque In Person</h2></g:Anchor>
+					<a href='#donorList'><h2>View Donor List</h2></a>
+			</g:HTMLPanel>
+		</g:east>
+		<g:center>
+			<g:HTMLPanel styleName="{style.infoPane}">
+				<g:HTMLPanel>
+					<!-- p class="{style.quotationText}" -->
+					<blockquote>
+						Lord Sri Krishna says (BG 9.26):
+						<br />
+						“If one offers Me with love and devotion and leaf, a flower, a fruit or water, I will accept
+						it.”
+					</blockquote>
+					Donations to the temple are tax deductible. Receipts are available upon request.
+				</g:HTMLPanel>
+				<br />
+				<g:TabBar ui:field="tabBar" />
+				<br />
+				<div ui:field="selectionSpecificContent">
+					<strong>Please select one of the categories above.</strong>
+				</div>
+			</g:HTMLPanel>
+		</g:center>
+	</g:DockLayoutPanel>
+</ui:UiBinder>

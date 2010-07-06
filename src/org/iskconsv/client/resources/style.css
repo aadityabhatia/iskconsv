@@ -1,20 +1,26 @@
-body{
-	font-family: sans-serif;		
+body {
+	font-family: sans-serif;
 }
 
 h1 {
 	color: teal;
+	font-variant: small-caps;
+}
+
+blockquote {
+	font-style: italic;
 }
 
 .rootPanel {
-	min-width: 760px;
-	min-height: 400px;
+	min-width: 950px;
+	min-height: 500px;
 }
 
 a,a:visited {
 	color: #6666BB;
 	text-decoration: none;
 	font-weight: bold;
+	cursor: pointer;
 }
 
 a:hover {

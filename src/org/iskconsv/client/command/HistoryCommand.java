@@ -15,8 +15,7 @@ public class HistoryCommand implements Command
 		this.token = token;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public HistoryCommand(Enum token)
+	public HistoryCommand(Enum<?> token)
 	{
 		this.token = token.name();
 	}

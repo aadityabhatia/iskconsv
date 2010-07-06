@@ -1,78 +1,105 @@
 package org.iskconsv.client.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.iskconsv.client.command.CommandClickHandler;
+import org.iskconsv.client.command.PopupCommand;
+import org.iskconsv.client.model.DonationType;
+import org.iskconsv.client.resources.Resources;
+import org.iskconsv.client.widget.InfoPopup;
+
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.FormElement;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.resources.client.CssResource;
+import com.google.gwt.resources.client.ResourceCallback;
+import com.google.gwt.resources.client.ResourceException;
+import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.TabBar;
 
 public class Donate extends Composite
 {
-
 	private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
 
-	interface MyUiBinder extends UiBinder<HTMLPanel, Donate>
+	interface MyUiBinder extends UiBinder<DockLayoutPanel, Donate>
 	{
 	}
 
 	interface Style extends CssResource
 	{
-		String selected();
-
-		String button();
-
 		String donateButton();
 
 		String amountButton();
 	}
 
 	@UiField
-	Button newTempleButton, operationsButton, sankirtanButton, donateOnceButton,
-			donateMonthlyButton, m10, m1, p1, p10;
+	Button donateOnceButton, donateMonthlyButton, m10, m1, p1, p10;
+	
+	@UiField Anchor donateDetailsElectronic, donateDetailsInPerson;
 
 	@UiField
 	Style style;
 
 	@UiField
-	InputElement donationItemName, donationAmount, donationType;
+	InputElement donationItemName, donationAmount, donationType, destinationAccount;
 
 	@UiField
+	DivElement selectionSpecificContent, category;
+	
+	@UiField
 	FormElement donationForm;
+	
+	@UiField TabBar tabBar;
+	
+	List<DonationType> donationTypes = new ArrayList<DonationType>();
+	
+	TextResource errorMessage;
 
-	public Donate()
+	public Donate(Resources resources)
 	{
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		errorMessage = resources.errorMessage();
 
-		newTempleButton.addStyleName(style.button());
-		operationsButton.addStyleName(style.button());
-		sankirtanButton.addStyleName(style.button());
-
-		donateOnceButton.addStyleName(style.donateButton());
-		donateMonthlyButton.addStyleName(style.donateButton());
-
+		tabBar.addTab("New Temple");
+		donationTypes.add(new DonationType("New Temple", resources.newTemple(), null, "teamisv@gmail.com"));
+		tabBar.addTab("Temple Operations");
+		donationTypes.add(new DonationType("Temple Operations", resources.templeOpsDonation(), null, "teamisv@gmail.com"));
+		tabBar.addTab("Sankirtan");
+		donationTypes.add(new DonationType("Sankirtan", resources.sankirtanDonation(), null, "teamisv@gmail.com"));
+		tabBar.addSelectionHandler(new DonationTypeSelectionHandler());
+		
 		m10.addStyleName(style.amountButton());
 		m1.addStyleName(style.amountButton());
 		p1.addStyleName(style.amountButton());
 		p10.addStyleName(style.amountButton());
 
-		DonationTypeClickHandler donationTypeClickHandler = new DonationTypeClickHandler();
-		newTempleButton.addClickHandler(donationTypeClickHandler);
-		operationsButton.addClickHandler(donationTypeClickHandler);
-		sankirtanButton.addClickHandler(donationTypeClickHandler);
+		donateOnceButton.addStyleName(style.donateButton());
+		donateMonthlyButton.addStyleName(style.donateButton());
 
 		AmountChangeClickHandler amountChangeClickHandler = new AmountChangeClickHandler();
 		m10.addClickHandler(amountChangeClickHandler);
 		m1.addClickHandler(amountChangeClickHandler);
 		p1.addClickHandler(amountChangeClickHandler);
 		p10.addClickHandler(amountChangeClickHandler);
+		
+		donateDetailsElectronic.addClickHandler(new CommandClickHandler(new PopupCommand(new InfoPopup(new HTMLPanel("<h2>Setup a bill-pay from your account to the following \"ISV - New Temple\" account</h2><br/><h3>Account number: 06221-02527</h3><h3>Routing number:121000358</h3><br/><h3>Bank of America</h3><h3>Pruneyard Branch</h3><h3>200 The Pruneyard</h3><h3>Campbell, CA 95008</h3><h3>Tel: 408-983-0588</h3>")))));
+		donateDetailsInPerson.addClickHandler(new CommandClickHandler(new PopupCommand(new InfoPopup(new HTMLPanel("<h2>Please see Raxit prabhuji or Deepak prabhuji at the temple for details.</h2><h3><a href='#location'>Where is the Temple?</a></h3>")))));
 	}
 
 	@UiHandler("donateOnceButton")
@@ -84,7 +111,7 @@ public class Donate extends Composite
 		// TODO: Validation
 		if (donationItemName.getValue().isEmpty())
 		{
-			Window.alert("Please select one of the categories above.");
+			Window.alert("Please select one of the categories.");
 			return;
 		}
 
@@ -105,24 +132,6 @@ public class Donate extends Composite
 		}
 
 		donationForm.submit();
-	}
-
-	class DonationTypeClickHandler implements ClickHandler
-	{
-		@Override
-		public void onClick(ClickEvent event)
-		{
-			Button[] buttons = { newTempleButton, operationsButton, sankirtanButton };
-			for (Button button : buttons)
-				button.getElement().removeClassName(style.selected());
-
-			Button button = (Button) event.getSource();
-
-			button.getElement().addClassName(style.selected());
-			button.setFocus(false);
-
-			donationItemName.setValue(button.getText());
-		}
 	}
 
 	class AmountChangeClickHandler implements ClickHandler
@@ -151,11 +160,46 @@ public class Donate extends Composite
 				amount += 1;
 			else if (delta.equals("+10"))
 				amount += 10;
-			
+
 			if (amount < 0)
 				amount = 0f;
 
 			donationAmount.setValue(String.valueOf(amount));
+		}
+	}
+	
+	class DonationTypeSelectionHandler implements SelectionHandler<Integer>
+	{
+		@Override
+		public void onSelection(SelectionEvent<Integer> event)
+		{
+			DonationType donationType = donationTypes.get(event.getSelectedItem());
+			
+			donationItemName.setValue(donationType.getName());
+			category.setInnerHTML(donationType.getName());
+			destinationAccount.setValue(donationType.getDestinationAccount());
+			
+			try
+			{
+				donationType.getInfo().getText(new ResourceCallback<TextResource>()
+				{
+					@Override
+					public void onSuccess(TextResource resource)
+					{
+						selectionSpecificContent.setInnerHTML(resource.getText());					
+					}
+					
+					@Override
+					public void onError(ResourceException e)
+					{
+						selectionSpecificContent.setInnerHTML(errorMessage.getText());
+					}
+				});
+			}
+			catch (ResourceException e)
+			{
+				selectionSpecificContent.setInnerHTML("errorMessage.getText()");
+			}
 		}
 	}
 }

@@ -2,20 +2,69 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:with type="org.iskconsv.client.resources.Resources" field="resources" />
 
-	<ui:style type="org.iskconsv.client.view.Home.Style">
+	<ui:style>
 		.container {
 			text-align: center;
-			font-size: 150%;
+			font-size: 125%;
+		}
+		
+		.sidePane {
+			background-color: #FFEEDD;
 		}
 	</ui:style>
 
-	<g:HTMLPanel ui:field="container" styleName='{style.container}'>
-		<img style='float:left' src='http://broapocalypse.files.wordpress.com/2009/04/radha_y_krishna_1.jpg' />
-		<h1>Connect with Krishna</h1>
-		<h3>Question - <a href='#iskcon'>ISKCON</a></h3>
-		<h3>Reflect</h3>
-		<h3>Experience - <a href='#calendar'>Calendar</a> - <a href='#video'>Live Video</a> - <a href='#spy'>across the globe</a></h3>
-		<h3>Support - <a href='#donate'>Donate</a></h3>
-		<h3><a href='#contact'>Contact</a></h3>
-	</g:HTMLPanel>
+	<g:DockLayoutPanel unit='EM' height="100%">
+		<g:west size='17'>
+			<g:HTMLPanel styleName='{style.container} {style.sidePane}'>
+				<h2>Question</h2>
+				<h3>
+					<a href='#iskcon'>ISKCON</a>
+				</h3>
+				<h3>
+					<a href='#founder'>Founder</a>
+				</h3>
+				<h3>
+					<a href='#motelSankirtan'>Motel Sankirtan</a>
+				</h3>
+
+				<h2>Experience</h2>
+				<h3>
+					<a href='#calendar'>Calendar</a>
+				</h3>
+				<h3>
+					<a href='#video'>Live Video</a>
+				</h3>
+				<h3>
+					<a href='#spy'>across the globe</a>
+				</h3>
+			</g:HTMLPanel>
+		</g:west>
+		<g:east size='17'>
+			<g:HTMLPanel styleName='{style.container} {style.sidePane}'>
+				<h2>Get In Touch</h2>
+				<h3>
+					<a href='#contact'>Contact</a>
+				</h3>
+				<h3>
+					<a href='#location'>Location</a>
+				</h3>
+
+				<h2>Support</h2>
+				<h3>
+					<a href='#donate'>Donate</a>
+				</h3>
+				<h3>
+					<a href='#donorList'>Donor List</a>
+				</h3>
+				
+				<h2>Reflect</h2>
+			</g:HTMLPanel>
+		</g:east>
+		<g:center>
+			<g:HTMLPanel styleName='{style.container}'>
+				<h1>Connect with Krishna</h1>
+				<img src='http://broapocalypse.files.wordpress.com/2009/04/radha_y_krishna_1.jpg' />
+			</g:HTMLPanel>
+		</g:center>
+	</g:DockLayoutPanel>
 </ui:UiBinder> 

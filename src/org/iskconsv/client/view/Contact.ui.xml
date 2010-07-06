@@ -5,19 +5,25 @@
 	<ui:style>
 		.container {
 			text-align: center;
-			font-size: 400%;
+			font-size: 150%;
 		}
 		
-		.middle {
+		
+	</ui:style>
+	<g:HTMLPanel styleName='{style.container}'>
+		
+		<h1>Contact Details</h1>
+		<h2>support@iskconsv.org</h2>
+		<h2>(408) 293-4959</h2>
+		<h2><a href='#location'>Click for Location</a></h2>
+		
+		<!--  h1 class="{style.middle}">ToDo</h1 .middle {
 			color: red;
 			width: 100%;
 			position: absolute;
 			top: 40%;
 			margin-top: -0.5em;
-		}
-	</ui:style>
-	<g:HTMLPanel styleName='{style.container}'>
-		<h1 class="{style.middle}">ToDo</h1>
+		}-->
 	</g:HTMLPanel>
 
 </ui:UiBinder> 

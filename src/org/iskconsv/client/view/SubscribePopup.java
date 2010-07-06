@@ -66,7 +66,7 @@ public class SubscribePopup extends PopupPanel implements ClickHandler
 			this.hide();
 		else
 		{
-			Window.open("http://groups.google.com/group/iskconsv-announcements/boxsubscribe?email="
+			Window.open("http://groups.google.com/group/isv-announcements/boxsubscribe?email="
 					+ URL.encodeComponent(emailTextBox.getText()), "_blank", null);
 		}
 	}
