@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.iskconsv.client.command.CommandClickHandler;
-import org.iskconsv.client.command.PopupCommand;
+import org.iskconsv.client.command.InfoPopupCommand;
 import org.iskconsv.client.model.DonationType;
 import org.iskconsv.client.resources.Resources;
-import org.iskconsv.client.widget.InfoPopup;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
@@ -29,7 +28,6 @@ import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.TabBar;
 
 public class Donate extends Composite
@@ -77,9 +75,9 @@ public class Donate extends Composite
 		errorMessage = resources.errorMessage();
 
 		tabBar.addTab("New Temple");
-		donationTypes.add(new DonationType("New Temple", resources.newTemple(), null, "teamisv@gmail.com"));
+		donationTypes.add(new DonationType("New Temple", resources.newTemple(), null, "isvnewtemple@gmail.com"));
 		tabBar.addTab("Temple Operations");
-		donationTypes.add(new DonationType("Temple Operations", resources.templeOpsDonation(), null, "teamisv@gmail.com"));
+		donationTypes.add(new DonationType("Temple Operations", resources.templeOpsDonation(), null, "nirakuladd@gmail.com"));
 		tabBar.addTab("Sankirtan");
 		donationTypes.add(new DonationType("Sankirtan", resources.sankirtanDonation(), null, "teamisv@gmail.com"));
 		tabBar.addSelectionHandler(new DonationTypeSelectionHandler());
@@ -98,8 +96,8 @@ public class Donate extends Composite
 		p1.addClickHandler(amountChangeClickHandler);
 		p10.addClickHandler(amountChangeClickHandler);
 		
-		donateDetailsElectronic.addClickHandler(new CommandClickHandler(new PopupCommand(new InfoPopup(new HTMLPanel("<h2>Setup a bill-pay from your account to the following \"ISV - New Temple\" account</h2><br/><h3>Account number: 06221-02527</h3><h3>Routing number:121000358</h3><br/><h3>Bank of America</h3><h3>Pruneyard Branch</h3><h3>200 The Pruneyard</h3><h3>Campbell, CA 95008</h3><h3>Tel: 408-983-0588</h3>")))));
-		donateDetailsInPerson.addClickHandler(new CommandClickHandler(new PopupCommand(new InfoPopup(new HTMLPanel("<h2>Please see Raxit prabhuji or Deepak prabhuji at the temple for details.</h2><h3><a href='#location'>Where is the Temple?</a></h3>")))));
+		donateDetailsElectronic.addClickHandler(new CommandClickHandler(new InfoPopupCommand(resources.donateElectronicInstructions())));
+		donateDetailsInPerson.addClickHandler(new CommandClickHandler(new InfoPopupCommand(resources.donateInPersonInstructions())));
 	}
 
 	@UiHandler("donateOnceButton")

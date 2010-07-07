@@ -14,8 +14,38 @@
 	</ui:style>
 
 	<g:DockLayoutPanel unit='EM' height="100%">
-		<g:west size='17'>
+		<g:west size='18'>
 			<g:HTMLPanel styleName='{style.container} {style.sidePane}'>
+				<h2>Experience</h2>
+				<h3>
+					<a href='#calendar'>Calendar</a>
+				</h3>
+				<h3>
+					<a href='#video'>Live Video</a>
+				</h3>
+				<h3>
+					<a href='#audioLectures'>Audio Lectures</a>
+				</h3>
+				<h3>
+					<a href='#spy'>across the globe</a>
+				</h3>
+
+				<h2>Get In Touch</h2>
+				<h3>
+					<a href='#contact'>Contact</a>
+				</h3>
+				<h3>
+					<a href='#location'>Location</a>
+				</h3>
+			</g:HTMLPanel>
+		</g:west>
+		<g:east size='18'>
+			<g:HTMLPanel styleName='{style.container} {style.sidePane}'>
+				<h2>Support</h2>
+				<h3>
+					<a href='#donate'>Donate</a>
+				</h3>
+				
 				<h2>Question</h2>
 				<h3>
 					<a href='#iskcon'>ISKCON</a>
@@ -26,38 +56,12 @@
 				<h3>
 					<a href='#motelSankirtan'>Motel Sankirtan</a>
 				</h3>
-
-				<h2>Experience</h2>
-				<h3>
-					<a href='#calendar'>Calendar</a>
-				</h3>
-				<h3>
-					<a href='#video'>Live Video</a>
-				</h3>
-				<h3>
-					<a href='#spy'>across the globe</a>
-				</h3>
-			</g:HTMLPanel>
-		</g:west>
-		<g:east size='17'>
-			<g:HTMLPanel styleName='{style.container} {style.sidePane}'>
-				<h2>Get In Touch</h2>
-				<h3>
-					<a href='#contact'>Contact</a>
-				</h3>
-				<h3>
-					<a href='#location'>Location</a>
-				</h3>
-
-				<h2>Support</h2>
-				<h3>
-					<a href='#donate'>Donate</a>
-				</h3>
 				<h3>
 					<a href='#donorList'>Donor List</a>
 				</h3>
-				
-				<h2>Reflect</h2>
+				<h3>
+					<a href='#fy09AnnualStatement'>Financial Statement</a>
+				</h3>
 			</g:HTMLPanel>
 		</g:east>
 		<g:center>

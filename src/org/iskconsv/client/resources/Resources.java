@@ -20,6 +20,9 @@ public interface Resources extends ClientBundle
 	@Source("errorMessage.txt")
 	TextResource errorMessage();
 	
+	@Source("contact.html")
+	ExternalTextResource contact();
+
 	@Source("iskcon.html")
 	ExternalTextResource iskcon();
 
@@ -37,4 +40,10 @@ public interface Resources extends ClientBundle
 	
 	@Source("motelSankirtan.html")
 	ExternalTextResource motelSankirtan();
+	
+	@Source("donateElectronicInstructions.html")
+	ExternalTextResource donateElectronicInstructions();
+	
+	@Source("donateInPersonInstructions.html")
+	ExternalTextResource donateInPersonInstructions();
 }

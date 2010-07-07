@@ -5,7 +5,6 @@ import org.iskconsv.client.command.HistoryCommand;
 import org.iskconsv.client.command.PopupCommand;
 import org.iskconsv.client.command.WidgetCommand;
 import org.iskconsv.client.resources.Resources;
-import org.iskconsv.client.view.Contact;
 import org.iskconsv.client.view.Donate;
 import org.iskconsv.client.view.Home;
 import org.iskconsv.client.view.LocationView;
@@ -58,13 +57,15 @@ public class Index implements EntryPoint
 
 	private static final String spyURL = "http://spy.appspot.com/find/iskcon?full=1&latest=25";
 
-	private static final String audioFilesURL = "http://audio.iskcondesiretree.info/06_-_More/08_-_ISKCON_Silicon_Valley-ISV/ISV.php";
+	private static final String audioLecturesURL = "http://audio.iskcondesiretree.info/06_-_More/08_-_ISKCON_Silicon_Valley-ISV/ISV.php";
 
-	private static final String donorListURL = "http://spreadsheets.google.com/pub?key=0AntwXKY6rGRmdHJGNnU0QmRYcGNEcFU2UGZUQXhfVWc&hl=en&single=true&gid=0&output=html&widget=true";
+	private static final String donorListURL = "http://spreadsheets.google.com/pub?key=0AntwXKY6rGRmdHJGNnU0QmRYcGNEcFU2UGZUQXhfVWc&hl=en&output=html&widget=true";
+
+	private static final String fy09AnnualStatementURL = "https://spreadsheets.google.com/pub?key=0AntwXKY6rGRmdFp1NzcxQ2w3cUFkTHhlUGZLQ0UxZ2c&output=html&widget=true";
 
 	enum Token
 	{
-		calendar, video, spy, donate, contact, iskcon, location, audioFiles, founder, motelSankirtan, donorList
+		calendar, video, spy, donate, contact, iskcon, location, audioLectures, founder, motelSankirtan, donorList, fy09AnnualStatement
 	}
 
 	@Override
@@ -112,35 +113,38 @@ public class Index implements EntryPoint
 		controller.addCommandMapItem(Token.video, new FrameCommand(videoURL));
 		experienceMenu.addItem("Live Video", new HistoryCommand(Token.video));
 
-		controller.addCommandMapItem(Token.audioFiles, new FrameCommand(audioFilesURL));
-		experienceMenu.addItem("Audio Files", new HistoryCommand(Token.audioFiles));
+		controller.addCommandMapItem(Token.audioLectures, new FrameCommand(audioLecturesURL));
+		experienceMenu.addItem("Audio Lectures", new HistoryCommand(Token.audioLectures));
 
 		controller.addCommandMapItem(Token.spy, new FrameCommand(spyURL));
 		experienceMenu.addItem("Live Stream", new HistoryCommand(Token.spy));
 
 		controller.addCommandMapItem(Token.donorList, new FrameCommand(donorListURL));
-		
+		controller.addCommandMapItem(Token.fy09AnnualStatement, new FrameCommand(fy09AnnualStatementURL));
+
 		controller.addCommandMapItem(Token.donate, new WidgetCommand(new Donate(resources), Token.donate));
 		menuBar.addItem("Donate", new HistoryCommand(Token.donate));
 
 		menuBar.addItem("Subscribe", new PopupCommand(new SubscribePopup()));
 
-		controller.addCommandMapItem(Token.contact, new WidgetCommand(new Contact(), Token.contact));
+		controller.addCommandMapItem(Token.contact, new WidgetCommand(new StaticView(resources.contact()),
+				Token.contact));
 		menuBar.addItem("Contact", new HistoryCommand(Token.contact));
 
 		controller.addCommandMapItem(Token.location, new WidgetCommand(new LocationView(), Token.location));
 		menuBar.addItem("Location", new HistoryCommand(Token.location));
 
-//		if (Cookies.getCookie("username") == null)
-//		{
-//			Anchor signInAnchor = topNavigationBar.addAnchor("Sign In", "#");
-//			signInAnchor.addClickHandler(new CommandClickHandler(new PopupCommand(new LoginPopup())));
-//		}
-//		else
-//		{
-//			topNavigationBar.addHTML(Cookies.getCookie("username"));
-//			topNavigationBar.addAnchor("Sign Out", "/auth/logout/");
-//		}
+		// if (Cookies.getCookie("username") == null)
+		// {
+		// Anchor signInAnchor = topNavigationBar.addAnchor("Sign In", "#");
+		// signInAnchor.addClickHandler(new CommandClickHandler(new PopupCommand(new
+		// LoginPopup())));
+		// }
+		// else
+		// {
+		// topNavigationBar.addHTML(Cookies.getCookie("username"));
+		// topNavigationBar.addAnchor("Sign Out", "/auth/logout/");
+		// }
 
 		History.fireCurrentHistoryState();
 	}
