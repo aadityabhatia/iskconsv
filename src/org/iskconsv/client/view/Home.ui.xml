@@ -5,16 +5,23 @@
 	<ui:style>
 		.container {
 			text-align: center;
-			font-size: 125%;
 		}
 		
 		.sidePane {
 			background-color: #FFEEDD;
 		}
+		
+		.sidePane h3 {
+			margin: 5px 0;
+		}
+		
+		.sidePane h2 {
+			margin: 10px 0 5px;
+		}
 	</ui:style>
 
 	<g:DockLayoutPanel unit='EM' height="100%">
-		<g:west size='18'>
+		<g:west size='15'>
 			<g:HTMLPanel styleName='{style.container} {style.sidePane}'>
 				<h2>Experience</h2>
 				<h3>
@@ -37,10 +44,7 @@
 				<h3>
 					<a href='#location'>Location</a>
 				</h3>
-			</g:HTMLPanel>
-		</g:west>
-		<g:east size='18'>
-			<g:HTMLPanel styleName='{style.container} {style.sidePane}'>
+
 				<h2>Support</h2>
 				<h3>
 					<a href='#donate'>Donate</a>
@@ -63,7 +67,7 @@
 					<a href='#fy09AnnualStatement'>Financial Statement</a>
 				</h3>
 			</g:HTMLPanel>
-		</g:east>
+		</g:west>
 		<g:center>
 			<g:HTMLPanel styleName='{style.container}'>
 				<h1>Connect with Krishna</h1>

@@ -53,7 +53,7 @@ public class Index implements EntryPoint
 
 	private static final String calendarURL = "http://www.google.com/calendar/embed?showTitle=0&showNav=0&showTabs=0&showCalendars=0&mode=AGENDA&height=600&wkst=2&bgcolor=%23FFFFFF&src=iskconsv.org_rbojmj93jcrbo0d4t6m17h54c0%40group.calendar.google.com&color=%23BE6D00&ctz=America%2FLos_Angeles";
 
-	private static final String videoURL = "http://www.justin.tv/widgets/live_embed_player.swf?channel=iskconsv";
+//	private static final String videoURL = "http://www.justin.tv/widgets/live_embed_player.swf?channel=iskconsv";
 
 	private static final String spyURL = "http://spy.appspot.com/find/iskcon?full=1&latest=25";
 
@@ -110,7 +110,7 @@ public class Index implements EntryPoint
 		controller.addCommandMapItem(Token.calendar, new FrameCommand(calendarURL));
 		experienceMenu.addItem("Event Calendar", new HistoryCommand(Token.calendar));
 
-		controller.addCommandMapItem(Token.video, new FrameCommand(videoURL));
+		controller.addCommandMapItem(Token.video, new WidgetCommand(new StaticView(resources.liveVideo()), Token.video));
 		experienceMenu.addItem("Live Video", new HistoryCommand(Token.video));
 
 		controller.addCommandMapItem(Token.audioLectures, new FrameCommand(audioLecturesURL));

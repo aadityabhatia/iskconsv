@@ -20,6 +20,8 @@ public class SubscribePopup extends PopupPanel implements ClickHandler
 
 	private TextBox emailTextBox;
 
+	private static final String GROUP_URL = "https://groups.google.com/a/iskconsv.org/group/announcements/";
+
 	public SubscribePopup()
 	{
 		FlowPanel container = new FlowPanel();
@@ -50,7 +52,7 @@ public class SubscribePopup extends PopupPanel implements ClickHandler
 		this.setGlassEnabled(true);
 		this.setAutoHideEnabled(false);
 	}
-	
+
 	@Override
 	public void center()
 	{
@@ -66,8 +68,7 @@ public class SubscribePopup extends PopupPanel implements ClickHandler
 			this.hide();
 		else
 		{
-			Window.open("http://groups.google.com/group/isv-announcements/boxsubscribe?email="
-					+ URL.encodeComponent(emailTextBox.getText()), "_blank", null);
+			Window.open(GROUP_URL + "boxsubscribe?email=" + URL.encodeComponent(emailTextBox.getText()), "_blank", null);
 		}
 	}
 }

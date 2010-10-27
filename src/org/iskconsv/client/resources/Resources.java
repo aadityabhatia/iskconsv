@@ -26,6 +26,9 @@ public interface Resources extends ClientBundle
 	@Source("iskcon.html")
 	ExternalTextResource iskcon();
 
+	@Source("live-video.html")
+	ExternalTextResource liveVideo();
+
 	@Source("founder.html")
 	ExternalTextResource founder();
 	
