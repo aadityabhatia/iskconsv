@@ -75,7 +75,7 @@ public class Donate extends Composite
 		errorMessage = resources.errorMessage();
 
 		tabBar.addTab("New Temple");
-		donationTypes.add(new DonationType("New Temple", resources.newTemple(), null, "isvnewtemple@gmail.com"));
+		donationTypes.add(new DonationType("New Temple", resources.newTemple(), null, "nirakuladd@gmail.com"));
 		tabBar.addTab("Temple Operations");
 		donationTypes.add(new DonationType("Temple Operations", resources.templeOpsDonation(), null, "nirakuladd@gmail.com"));
 		tabBar.addTab("Sankirtan");
