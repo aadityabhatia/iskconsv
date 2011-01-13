@@ -67,7 +67,6 @@
 						<input type="hidden" value="M" name="t3" />
 						<input type="hidden" value="1" name="src" />
 						<input type="hidden" value="1" name="sra" />
-						<input type="hidden" name="return" value="http://www.iskconsv.org/payment-complete/" />
 						<input ui:field="donationTypeInputElement" type="hidden" value="" name="cmd" />
 						<input type="hidden" value="1" name="no_note" />
 						<input type="hidden" value="USD" name="currency_code" />
