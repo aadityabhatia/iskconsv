@@ -33,7 +33,6 @@ import com.google.gwt.user.client.ui.TabBar;
 public class Donate extends Composite
 {
 	private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
-	private DonationType donation_type;
 
 	interface MyUiBinder extends UiBinder<DockLayoutPanel, Donate>
 	{
@@ -55,7 +54,7 @@ public class Donate extends Composite
 	Style style;
 
 	@UiField
-	InputElement donationItemName, donationAmount, donationType, destinationAccount;
+	InputElement donationItemNameInputElement, donationAmountInputElement, donationTypeInputElement, destinationAccountInputElement;
 
 	@UiField
 	DivElement selectionSpecificContent, category;
@@ -66,6 +65,8 @@ public class Donate extends Composite
 	@UiField TabBar tabBar;
 	
 	List<DonationType> donationTypes = new ArrayList<DonationType>();
+	
+	private DonationType donationType;
 	
 	TextResource errorMessage;
 
@@ -78,9 +79,9 @@ public class Donate extends Composite
 		tabBar.addTab("New Temple");
 		donationTypes.add(new DonationType("New Temple", resources.newTemple(), null, "isvnewtemple@gmail.com", "nirakuladd@gmail.com"));
 		tabBar.addTab("Temple Operations");
-		donationTypes.add(new DonationType("Temple Operations", resources.templeOpsDonation(), null, "nirakuladd@gmail.com", "nirakuladd@gmail.com"));
+		donationTypes.add(new DonationType("Temple Operations", resources.templeOpsDonation(), null, "nirakuladd@gmail.com"));
 		tabBar.addTab("Sankirtan");
-		donationTypes.add(new DonationType("Sankirtan", resources.sankirtanDonation(), null, "teamisv@gmail.com", "teamisv@gmail.com"));
+		donationTypes.add(new DonationType("Sankirtan", resources.sankirtanDonation(), null, "teamisv@gmail.com"));
 		tabBar.addSelectionHandler(new DonationTypeSelectionHandler());
 		
 		m10.addStyleName(style.amountButton());
@@ -104,16 +105,16 @@ public class Donate extends Composite
 	@UiHandler("donateOnceButton")
 	void donateOnce(ClickEvent event)
 	{
-		donationType.setValue("_donations");
-		donationAmount.setName("amount");
+		donationTypeInputElement.setValue("_donations");
+		donationAmountInputElement.setName("amount");
 
 		// TODO: Validation
-		if (donationItemName.getValue().isEmpty())
+		if (donationItemNameInputElement.getValue().isEmpty())
 		{
 			Window.alert("Please select one of the categories.");
 			return;
 		}
-		destinationAccount.setValue(donation_type.getDestinationAccountOneTime());
+		destinationAccountInputElement.setValue(donationType.getDestinationAccountOneTime());
 
 		donationForm.submit();
 	}
@@ -121,16 +122,16 @@ public class Donate extends Composite
 	@UiHandler("donateMonthlyButton")
 	void donateMonthly(ClickEvent event)
 	{
-		donationType.setValue("_xclick-subscriptions");
-		donationAmount.setName("a3");
+		donationTypeInputElement.setValue("_xclick-subscriptions");
+		donationAmountInputElement.setName("a3");
 
 		// TODO: Validation
-		if (donationItemName.getValue().isEmpty())
+		if (donationItemNameInputElement.getValue().isEmpty())
 		{
 			Window.alert("Please select one of the categories above.");
 			return;
 		}
-		destinationAccount.setValue(donation_type.getDestinationAccountMonthly());
+		destinationAccountInputElement.setValue(donationType.getDestinationAccountMonthly());
 
 		donationForm.submit();
 	}
@@ -146,7 +147,7 @@ public class Donate extends Composite
 
 			try
 			{
-				amount = Float.parseFloat(donationAmount.getValue());
+				amount = Float.parseFloat(donationAmountInputElement.getValue());
 			}
 			catch (NumberFormatException e)
 			{
@@ -165,7 +166,7 @@ public class Donate extends Composite
 			if (amount < 0)
 				amount = 0f;
 
-			donationAmount.setValue(String.valueOf(amount));
+			donationAmountInputElement.setValue(String.valueOf(amount));
 		}
 	}
 	
@@ -174,13 +175,13 @@ public class Donate extends Composite
 		@Override
 		public void onSelection(SelectionEvent<Integer> event)
 		{
-			donation_type = donationTypes.get(event.getSelectedItem());
-			donationItemName.setValue(donation_type.getName());
-			category.setInnerHTML(donation_type.getName());
+			donationType = donationTypes.get(event.getSelectedItem());
+			donationItemNameInputElement.setValue(donationType.getName());
+			category.setInnerHTML(donationType.getName());
 			
 			try
 			{
-				donation_type.getInfo().getText(new ResourceCallback<TextResource>()
+				donationType.getInfo().getText(new ResourceCallback<TextResource>()
 				{
 					@Override
 					public void onSuccess(TextResource resource)

@@ -11,6 +11,15 @@ public class DonationType
 	private String destinationAccountOneTime;
 	private String destinationAccountMonthly;
 	
+	public DonationType(String name, ExternalTextResource info, ImageResource image, String destinationAccount)
+	{
+		this.name = name;
+		this.info = info;
+		this.image = image;
+		this.destinationAccountOneTime = destinationAccount;
+		this.destinationAccountMonthly = destinationAccount;
+	}
+	
     public DonationType(String name, ExternalTextResource info, ImageResource image, String destinationAccountOneTime, String destinationAccountMonthly)
 	{
 		this.name = name;

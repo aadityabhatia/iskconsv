@@ -56,19 +56,19 @@
 						target="_blank">
 						<g:Button ui:field="m10">-10</g:Button>
 						<g:Button ui:field="m1">-1</g:Button>
-						<input ui:field="donationAmount" type="text" class="{style.amountTextbox}" value="51"
+						<input ui:field="donationAmountInputElement" type="text" class="{style.amountTextbox}" value="51"
 							name="a3" />
 						<g:Button ui:field="p1">+1</g:Button>
 						<g:Button ui:field="p10">+10</g:Button>
 
-						<input ui:field="donationItemName" type="hidden" name="item_name" />
-						<input ui:field="destinationAccount" type="hidden" value="teamisv@gmail.com" name="business" />
+						<input ui:field="donationItemNameInputElement" type="hidden" name="item_name" />
+						<input ui:field="destinationAccountInputElement" type="hidden" value="teamisv@gmail.com" name="business" />
 						<input type="hidden" value="1" name="p3" />
 						<input type="hidden" value="M" name="t3" />
 						<input type="hidden" value="1" name="src" />
 						<input type="hidden" value="1" name="sra" />
 						<input type="hidden" name="return" value="http://www.iskconsv.org/payment-complete/" />
-						<input ui:field="donationType" type="hidden" value="" name="cmd" />
+						<input ui:field="donationTypeInputElement" type="hidden" value="" name="cmd" />
 						<input type="hidden" value="1" name="no_note" />
 						<input type="hidden" value="USD" name="currency_code" />
 						<input type="hidden" value="US" name="lc" />
