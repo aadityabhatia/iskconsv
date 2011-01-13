@@ -8,14 +8,16 @@ public class DonationType
 	private String name;
 	private ExternalTextResource info;
 	private ImageResource image;
-	private String destinationAccount;
+	private String destinationAccountOneTime;
+	private String destinationAccountMonthly;
 	
-	public DonationType(String name, ExternalTextResource info, ImageResource image, String destinationAccount)
+    public DonationType(String name, ExternalTextResource info, ImageResource image, String destinationAccountOneTime, String destinationAccountMonthly)
 	{
 		this.name = name;
 		this.info = info;
 		this.image = image;
-		this.destinationAccount = destinationAccount;
+		this.destinationAccountOneTime = destinationAccountOneTime;
+		this.destinationAccountMonthly = destinationAccountMonthly;
 	}
 
 	public String getName()
@@ -33,8 +35,12 @@ public class DonationType
 		return image;
 	}
 
-	public String getDestinationAccount()
+	public String getDestinationAccountOneTime()
 	{
-		return destinationAccount;
+		return destinationAccountOneTime;
+	}
+	public String getDestinationAccountMonthly()
+	{
+		return destinationAccountMonthly;
 	}
 }

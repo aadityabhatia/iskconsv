@@ -33,6 +33,7 @@ import com.google.gwt.user.client.ui.TabBar;
 public class Donate extends Composite
 {
 	private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
+	private DonationType donation_type;
 
 	interface MyUiBinder extends UiBinder<DockLayoutPanel, Donate>
 	{
@@ -75,11 +76,11 @@ public class Donate extends Composite
 		errorMessage = resources.errorMessage();
 
 		tabBar.addTab("New Temple");
-		donationTypes.add(new DonationType("New Temple", resources.newTemple(), null, "nirakuladd@gmail.com"));
+		donationTypes.add(new DonationType("New Temple", resources.newTemple(), null, "isvnewtemple@gmail.com", "nirakuladd@gmail.com"));
 		tabBar.addTab("Temple Operations");
-		donationTypes.add(new DonationType("Temple Operations", resources.templeOpsDonation(), null, "nirakuladd@gmail.com"));
+		donationTypes.add(new DonationType("Temple Operations", resources.templeOpsDonation(), null, "nirakuladd@gmail.com", "nirakuladd@gmail.com"));
 		tabBar.addTab("Sankirtan");
-		donationTypes.add(new DonationType("Sankirtan", resources.sankirtanDonation(), null, "teamisv@gmail.com"));
+		donationTypes.add(new DonationType("Sankirtan", resources.sankirtanDonation(), null, "teamisv@gmail.com", "teamisv@gmail.com"));
 		tabBar.addSelectionHandler(new DonationTypeSelectionHandler());
 		
 		m10.addStyleName(style.amountButton());
@@ -112,6 +113,7 @@ public class Donate extends Composite
 			Window.alert("Please select one of the categories.");
 			return;
 		}
+		destinationAccount.setValue(donation_type.getDestinationAccountOneTime());
 
 		donationForm.submit();
 	}
@@ -128,6 +130,7 @@ public class Donate extends Composite
 			Window.alert("Please select one of the categories above.");
 			return;
 		}
+		destinationAccount.setValue(donation_type.getDestinationAccountMonthly());
 
 		donationForm.submit();
 	}
@@ -171,15 +174,13 @@ public class Donate extends Composite
 		@Override
 		public void onSelection(SelectionEvent<Integer> event)
 		{
-			DonationType donationType = donationTypes.get(event.getSelectedItem());
-			
-			donationItemName.setValue(donationType.getName());
-			category.setInnerHTML(donationType.getName());
-			destinationAccount.setValue(donationType.getDestinationAccount());
+			donation_type = donationTypes.get(event.getSelectedItem());
+			donationItemName.setValue(donation_type.getName());
+			category.setInnerHTML(donation_type.getName());
 			
 			try
 			{
-				donationType.getInfo().getText(new ResourceCallback<TextResource>()
+				donation_type.getInfo().getText(new ResourceCallback<TextResource>()
 				{
 					@Override
 					public void onSuccess(TextResource resource)
