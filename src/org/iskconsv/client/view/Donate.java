@@ -78,10 +78,12 @@ public class Donate extends Composite
 
 		tabBar.addTab("New Temple");
 		donationTypes.add(new DonationType("New Temple", resources.newTemple(), null, "isvnewtemple@gmail.com", "nirakuladd@gmail.com"));
-		tabBar.addTab("Temple Operations");
+		tabBar.addTab("Operations");
 		donationTypes.add(new DonationType("Temple Operations", resources.templeOpsDonation(), null, "nirakuladd@gmail.com"));
 		tabBar.addTab("Sankirtan");
 		donationTypes.add(new DonationType("Sankirtan", resources.sankirtanDonation(), null, "teamisv@gmail.com"));
+		tabBar.addTab("College Programs");
+		donationTypes.add(new DonationType("College Programs", resources.collegeProgramsDonation(), null, "srigovindadutta.das@gmail.com"));
 		tabBar.addSelectionHandler(new DonationTypeSelectionHandler());
 		
 		m10.addStyleName(style.amountButton());

@@ -35,7 +35,7 @@
 		}
 		
 		.categoryName {
-			color: #FF7F00;
+			color: red;
 			font-variant: small-caps;
 			font-size: 230%;
 			font-weight: bold;
@@ -44,11 +44,11 @@
 	</ui:style>
 
 	<g:DockLayoutPanel height="100%" unit="EM">
-		<g:east size="30">
+		<g:east size="27">
 			<g:HTMLPanel styleName="{style.donateWidget}">
 				<h1>Donate for</h1>
 				<div ui:field="category" class="{style.categoryName}">
-					~ <small>select a category on left</small> ~
+					~ <small>select category on left</small> ~
 				</div>
 				<div>
 					<h2>Via Paypal</h2>
@@ -78,9 +78,9 @@
 					<g:Button ui:field="donateMonthlyButton">Donate Monthly</g:Button>
 				</div>
 				<br />
-					<g:Anchor ui:field="donateDetailsElectronic"><h2>E-Billpay Bank transfer</h2></g:Anchor>
-					<g:Anchor ui:field="donateDetailsInPerson"><h2>Drop a Cheque In Person</h2></g:Anchor>
-					<a href='#donorList'><h2>View Donor List</h2></a>
+					<g:Anchor ui:field="donateDetailsElectronic"><p>E-Billpay Bank transfer</p></g:Anchor>
+					<g:Anchor ui:field="donateDetailsInPerson"><p>Drop a Cheque In Person</p></g:Anchor>
+					<a href='#donorList'><p>View Donor List</p></a>
 			</g:HTMLPanel>
 		</g:east>
 		<g:center>

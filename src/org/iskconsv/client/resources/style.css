@@ -2,9 +2,14 @@ body {
 	font-family: sans-serif;
 }
 
-h1 {
-	color: teal;
+h1, h2 {
+	color: #FF7F00;
 	font-variant: small-caps;
+	clear: both;
+}
+
+h2 {
+	color: brown;
 }
 
 blockquote {

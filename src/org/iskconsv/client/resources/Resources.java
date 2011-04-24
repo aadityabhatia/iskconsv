@@ -44,6 +44,21 @@ public interface Resources extends ClientBundle
 	@Source("motelSankirtan.html")
 	ExternalTextResource motelSankirtan();
 	
+	@Source("collegePrograms.html")
+	TextResource collegePrograms();
+	
+	@Source("collegeProgramsDonation.html")
+	ExternalTextResource collegeProgramsDonation();
+	
+	@Source("collegeProgramsSJSU.html")
+	ExternalTextResource collegeProgramsSJSU();
+	
+	@Source("collegeProgramsStanford.html")
+	ExternalTextResource collegeProgramsStanford();
+	
+	@Source("collegeProgramsSCU.html")
+	ExternalTextResource collegeProgramsSCU();
+	
 	@Source("donateElectronicInstructions.html")
 	ExternalTextResource donateElectronicInstructions();
 	

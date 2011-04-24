@@ -5,6 +5,7 @@ import org.iskconsv.client.command.HistoryCommand;
 import org.iskconsv.client.command.PopupCommand;
 import org.iskconsv.client.command.WidgetCommand;
 import org.iskconsv.client.resources.Resources;
+import org.iskconsv.client.view.CollegePrograms;
 import org.iskconsv.client.view.Donate;
 import org.iskconsv.client.view.Home;
 import org.iskconsv.client.view.LocationView;
@@ -53,7 +54,8 @@ public class Index implements EntryPoint
 
 	private static final String calendarURL = "http://www.google.com/calendar/embed?showTitle=0&showNav=0&showTabs=0&showCalendars=0&mode=AGENDA&height=600&wkst=2&bgcolor=%23FFFFFF&src=iskconsv.org_rbojmj93jcrbo0d4t6m17h54c0%40group.calendar.google.com&color=%23BE6D00&ctz=America%2FLos_Angeles";
 
-//	private static final String videoURL = "http://www.justin.tv/widgets/live_embed_player.swf?channel=iskconsv";
+	// private static final String videoURL =
+	// "http://www.justin.tv/widgets/live_embed_player.swf?channel=iskconsv";
 
 	private static final String spyURL = "http://spy.appspot.com/find/iskcon?full=1&latest=25";
 
@@ -65,7 +67,7 @@ public class Index implements EntryPoint
 
 	enum Token
 	{
-		calendar, video, spy, donate, contact, iskcon, location, audioLectures, founder, motelSankirtan, donorList, fy09AnnualStatement
+		calendar, video, spy, donate, contact, iskcon, location, audioLectures, founder, motelSankirtan, donorList, fy09AnnualStatement, collegePrograms
 	}
 
 	@Override
@@ -100,9 +102,16 @@ public class Index implements EntryPoint
 				Token.founder));
 		aboutMenu.addItem("Founder", new HistoryCommand(Token.founder));
 
+		MenuBar projectsMenu = new MenuBar(true);
+		menuBar.addItem("Projects", projectsMenu);
+
 		controller.addCommandMapItem(Token.motelSankirtan, new WidgetCommand(
 				new StaticView(resources.motelSankirtan()), Token.motelSankirtan));
-		aboutMenu.addItem("Motel Sankirtan", new HistoryCommand(Token.motelSankirtan));
+		projectsMenu.addItem("Motel Sankirtan", new HistoryCommand(Token.motelSankirtan));
+
+		controller.addCommandMapItem(Token.collegePrograms, new WidgetCommand(new CollegePrograms(resources),
+				Token.collegePrograms));
+		projectsMenu.addItem("College Programs", new HistoryCommand(Token.collegePrograms));
 
 		MenuBar experienceMenu = new MenuBar(true);
 		menuBar.addItem("Experience", experienceMenu);
@@ -110,7 +119,8 @@ public class Index implements EntryPoint
 		controller.addCommandMapItem(Token.calendar, new FrameCommand(calendarURL));
 		experienceMenu.addItem("Event Calendar", new HistoryCommand(Token.calendar));
 
-		controller.addCommandMapItem(Token.video, new WidgetCommand(new StaticView(resources.liveVideo()), Token.video));
+		controller
+				.addCommandMapItem(Token.video, new WidgetCommand(new StaticView(resources.liveVideo()), Token.video));
 		experienceMenu.addItem("Live Video", new HistoryCommand(Token.video));
 
 		controller.addCommandMapItem(Token.audioLectures, new FrameCommand(audioLecturesURL));
